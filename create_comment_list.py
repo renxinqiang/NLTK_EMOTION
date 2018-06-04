@@ -7,6 +7,8 @@ import math
 
 import jieba
 
+import re
+
 comment_file = 'comment.py'
 
 connect = pymysql.connect('127.0.0.1', 'root', 'root', 'comment', charset = 'utf8')
@@ -24,6 +26,7 @@ count = cursor.fetchone()[0]
 
 page = math.ceil(count / size)
 
+times = 1
 for x in range(1,page+1):
     where = ''
     if id :
@@ -34,8 +37,9 @@ for x in range(1,page+1):
     cursor.execute(sql)
     result = cursor.fetchall()
 
-    if id % 50000 == 0:
-        comment_file = 'comment'+str(id)+'.py'
+    if x % 5 == 0:
+        comment_file = 'comment'+str(times)+'.py'
+        times += 1
 
     print(comment_file)
     with open(comment_file, 'a', encoding="utf-8") as f:
@@ -43,6 +47,8 @@ for x in range(1,page+1):
             comm = res[1]
             if comm is 'None':
                 continue
+            r1 = u'[a-zA-Z0-9’!"#$%&\'()*+,-./:;<=>?@，。?★、…【】《》？“”‘’！[\\]^_`{|}~]+'  # 用户也可以在此进行自定义过滤字符
+            comm = re.sub(r1,'',comm)
             jieba_res = jieba.cut(comm)
             if not jieba_res :
                 continue
@@ -53,7 +59,6 @@ for x in range(1,page+1):
             f.write(write_str)
 
     id = result[-1][0]
-
 
 
 cursor.close()
