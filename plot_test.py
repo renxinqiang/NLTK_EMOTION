@@ -29,15 +29,30 @@ import comment21
 
 # print(jb.ci)
 # exit()
-content = comment1.ci + comment2.ci + comment3.ci + \
-comment4.ci + comment5.ci + comment6.ci + \
-comment7.ci + comment8.ci + comment9.ci + \
-comment10.ci + comment11.ci + comment12.ci + \
-comment13.ci + comment14.ci + comment15.ci + \
-comment16.ci + comment17.ci + comment18.ci + \
-comment19.ci + comment20.ci + comment21.ci
+content = comment1.ci + \
+          comment2.ci + \
+          comment3.ci + \
+          comment4.ci + \
+          comment5.ci + \
+          comment6.ci + \
+          comment7.ci + \
+          comment8.ci + \
+          comment9.ci + \
+          comment10.ci + \
+          comment11.ci + \
+          comment12.ci + \
+          comment13.ci + \
+          comment14.ci + \
+          comment15.ci + \
+          comment16.ci + \
+          comment17.ci + \
+          comment18.ci + \
+          comment19.ci + \
+          comment20.ci + \
+          comment21.ci
+
 
 cfd = nltk.FreqDist(content)
-cfd.tabulate(50)
+# cfd.tabulate(50)
 cfd.plot(50)
 

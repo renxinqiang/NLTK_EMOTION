@@ -27,7 +27,8 @@ count = cursor.fetchone()[0]
 page = math.ceil(count / size)
 
 jieba.analyse.set_stop_words('stop_words.txt')
-
+jieba.add_word('脑子瓦塔',freq=20000)
+jieba.add_word('玛吉亚巴库内',freq=20000)
 for x in range(1,page+1):
     where = ''
     if id :
